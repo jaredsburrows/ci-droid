@@ -1,0 +1,3 @@
+rootProject.name = "ci"
+
+include ":ci-android"
