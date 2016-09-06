@@ -1,4 +1,4 @@
-package burrows.apps.ci.rest.model.request;
+package burrows.apps.ci.rest.model.travisci.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -8,24 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * POST /authorizations HTTP/1.1
- * Host: api.github.com
- * Content-Type: application/json
- * Authorization: Basic ...
- * <p>
- * {
- * "scopes": [
- * "read:org", "user:email", "repo_deployment",
- * "repo:status", "write:repo_hook"
- * ],
- * "note": "temporary token to auth against travis"
- * }
  * @see <a href="https://docs.travis-ci.com/api#with-a-github-token">https://docs.travis-ci.com/api#with-a-github-token</a>
  */
 @Generated("org.jsonschema2pojo")
 public class AuthorizationRequest {
-  @SerializedName("scopes") @Expose private List<String> scopes = new ArrayList<String>();
-  @SerializedName("note") @Expose private String note;
+
+  @SerializedName("scopes")
+  @Expose
+  private List<String> scopes = new ArrayList<String>();
+  @SerializedName("note")
+  @Expose
+  private String note;
 
   /**
    * No args constructor for use in serialization

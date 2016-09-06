@@ -1,4 +1,4 @@
-package burrows.apps.ci.rest.model.response;
+package burrows.apps.ci.rest.model.travisci.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -8,27 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * HTTP/1.1 201 Created
- * Content-Type: application/json
- * <p>
- * {
- * "id": 1,
- * "url": "https://api.github.com/authorizations/1",
- * "scopes": [
- * "read:org", "user:email", "repo_deployment",
- * "repo:status", "write:repo_hook"
- * ],
- * "token": "YOUR GITHUB TOKEN",
- * "note": "temporary token to auth against travis"
- * }
+ * @see <a href="https://docs.travis-ci.com/api#creating-a-temporary-github-token">https://docs.travis-ci.com/api#creating-a-temporary-github-token</a>
  */
 @Generated("org.jsonschema2pojo")
 public class AuthorizationResponse {
-  @SerializedName("id") @Expose private long id;
-  @SerializedName("url") @Expose private String url;
-  @SerializedName("scopes") @Expose private List<String> scopes = new ArrayList<String>();
-  @SerializedName("token") @Expose private String token;
-  @SerializedName("note") @Expose private String note;
+
+  @SerializedName("id")
+  @Expose
+  private Long id;
+  @SerializedName("url")
+  @Expose
+  private String url;
+  @SerializedName("scopes")
+  @Expose
+  private List<String> scopes = new ArrayList<String>();
+  @SerializedName("token")
+  @Expose
+  private String token;
+  @SerializedName("note")
+  @Expose
+  private String note;
 
   /**
    * No args constructor for use in serialization
@@ -43,7 +42,7 @@ public class AuthorizationResponse {
    * @param note
    * @param url
    */
-  public AuthorizationResponse(long id, String url, List<String> scopes, String token, String note) {
+  public AuthorizationResponse(Long id, String url, List<String> scopes, String token, String note) {
     this.id = id;
     this.url = url;
     this.scopes = scopes;
@@ -54,18 +53,18 @@ public class AuthorizationResponse {
   /**
    * @return The id
    */
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
   /**
    * @param id The id
    */
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public AuthorizationResponse withId(long id) {
+  public AuthorizationResponse withId(Long id) {
     this.id = id;
     return this;
   }
