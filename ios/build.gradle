@@ -1,0 +1,29 @@
+buildscript {
+  repositories {
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
+
+  dependencies {
+    classpath "gradle.plugin.org.openbakery:xcode-plugin:0.14.0"
+  }
+}
+
+apply plugin: "org.openbakery.xcode-plugin"
+
+xcodebuild {
+  target = "ci"
+  scheme = "ci"
+
+  configuration = "Debug"
+
+  destination {
+    platform = "iOS Simulator"
+    name = "iPhone 6s"
+    os = "9.0"
+  }
+
+  coverage {
+    outputFormat = "xml"
+    exclude = '.*h$|.*UnitTests.*m$'
+  }
+}

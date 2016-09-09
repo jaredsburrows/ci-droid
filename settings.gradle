@@ -1,3 +1,4 @@
 rootProject.name = "ci-droid"
 
-include ":ci-android"
+include ":android"
+include ":ios"

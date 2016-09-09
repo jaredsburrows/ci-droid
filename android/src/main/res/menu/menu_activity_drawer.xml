@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedIds">
+
+    <!-- App Specific -->
+    <group
+        android:id="@+id/group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/menu_nav_home" />
+    </group>
+
+    <!-- Universal across all apps, this group creates the line-separator -->
+    <group android:id="@+id/group2">
+        <item
+            android:id="@+id/menu_app_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/menu_nav_settings" />
+        <item
+            android:id="@+id/menu_send_feedback"
+            android:icon="@drawable/ic_email_black_24dp"
+            android:title="@string/menu_nav_feedback" />
+        <item
+            android:id="@+id/menu_blog_help"
+            android:icon="@drawable/ic_help_black_24dp"
+            android:title="@string/menu_nav_help" />
+    </group>
+</menu>

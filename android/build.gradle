@@ -1,0 +1,106 @@
+buildscript {
+  repositories {
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle:2.2.0-rc2"
+    classpath "com.neenbedankt.gradle.plugins:android-apt:1.8"
+    classpath "com.github.triplet.gradle:play-publisher:1.1.5"
+  }
+}
+
+apply plugin: "com.android.application"
+apply plugin: "com.neenbedankt.android-apt"
+
+android {
+  compileSdkVersion 24
+  buildToolsVersion "24.0.2"
+
+  defaultConfig {
+    applicationId "burrows.apps.ci"
+    minSdkVersion 15
+    targetSdkVersion 24
+    versionCode 1
+    versionName "1.0"
+
+    testApplicationId "burrows.apps.ci.test"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    resConfigs "en"
+
+    vectorDrawables.useSupportLibrary = true
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+
+  dexOptions {
+    preDexLibraries = !rootProject.ext.ci
+  }
+
+  buildTypes {
+    debug {
+      applicationIdSuffix ".debug"
+
+      buildConfigField("okhttp3.logging.HttpLoggingInterceptor.Level",
+              "RETROFIT_LOG_LEVEL",
+              "okhttp3.logging.HttpLoggingInterceptor.Level.BODY")
+    }
+    release {
+      buildConfigField("okhttp3.logging.HttpLoggingInterceptor.Level",
+              "RETROFIT_LOG_LEVEL",
+              "okhttp3.logging.HttpLoggingInterceptor.Level.NONE")
+    }
+  }
+
+  testOptions {
+    unitTests {
+      returnDefaultValues = true
+    }
+  }
+}
+
+def supportLibraryVersion = "24.2.0"
+def okHttpVersion = "3.4.1"
+def retrofitVersion = "2.1.0"
+def butterKnifeVersion = "8.4.0"
+def daggerVersion = "2.6"
+def leakCanaryVersion = "1.4-beta2"
+
+dependencies {
+  compile "com.android.support:design:${supportLibraryVersion}"
+  compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+  compile "com.android.support:support-v4:${supportLibraryVersion}"
+  compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+  compile "com.android.support:cardview-v7:${supportLibraryVersion}"
+  compile "com.android.support:support-annotations:${supportLibraryVersion}"
+  compile "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}"
+  compile "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+  compile "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+  compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+  compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+  compile "com.jakewharton:butterknife:${butterKnifeVersion}"
+  compile "com.google.dagger:dagger:${daggerVersion}"
+  compile "io.reactivex:rxandroid:1.2.1"
+  compile "io.reactivex:rxjava:1.1.6"
+  compile "com.orhanobut:logger:1.15"
+  compile "io.doorbell:android-sdk:0.2.6"
+
+  // TODO rxjava2
+//  compile "io.reactivex.rxjava2:rxandroid:${rxJavaVersion}"
+//  compile "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+//  compile "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0-RC1"
+
+  debugCompile "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+  releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
+
+  apt "com.jakewharton:butterknife-compiler:${butterKnifeVersion}"
+  apt "com.google.dagger:dagger-compiler:${daggerVersion}"
+
+  provided "org.glassfish:javax.annotation:10.0-b28"
+
+  testCompile "junit:junit:4.12"
+}
